@@ -11,18 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.mascaro101.weatherapp1.api.WeatherApi;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private TextView tvWeather;
     private Button btnFetch;
-    private String API_KEY = "c17f09852485689ed31fba89e7bd97df"; // Replace with your API key
+
+    private TextView clotheRecomendation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvWeather = findViewById(R.id.tvWeather);
         btnFetch = findViewById(R.id.btnFetch);
+        clotheRecomendation = findViewById(R.id.clotheRecommendation);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         btnFetch.setOnClickListener(new View.OnClickListener() {
@@ -64,55 +59,12 @@ public class MainActivity extends AppCompatActivity {
                 if (location != null) {
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-                    fetchWeather(latitude, longitude);
+                    WeatherApi.fetchWeather(MainActivity.this, latitude, longitude, tvWeather, clotheRecomendation);
                 } else {
                     tvWeather.setText("Unable to get location.");
                 }
             }
         });
-    }
-
-    private void fetchWeather(double latitude, double longitude) {
-        String url = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY + "&units=metric";
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    String city = response.getString("name");
-                    JSONObject main = response.getJSONObject("main");
-                    double temp = main.getDouble("temp");
-                    double tempMin = main.getDouble("temp_min");
-                    double tempMax = main.getDouble("temp_max");
-                    int humidity = main.getInt("humidity");
-
-                    JSONObject wind = response.getJSONObject("wind");
-                    double windSpeed = wind.getDouble("speed");
-
-                    JSONObject sys = response.getJSONObject("sys");
-                    String country = sys.getString("country");
-
-                    String weatherInfo = "City: " + city + ", " + country + "\n" +
-                            "Temperature: " + temp + "°C\n" +
-                            "Min: " + tempMin + "°C, Max: " + tempMax + "°C\n" +
-                            "Humidity: " + humidity + "%\n" +
-                            "Wind Speed: " + windSpeed + " m/s";
-
-                    tvWeather.setText(weatherInfo);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    tvWeather.setText("Error parsing weather data.");
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                tvWeather.setText("Error fetching weather data.");
-            }
-        });
-
-        queue.add(request);
     }
 
     @Override
