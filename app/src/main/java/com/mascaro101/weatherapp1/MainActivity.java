@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private TextView tvWeather;
     private Button btnFetch;
-
     private TextView clotheRecomendation;
+    private ImageView weatherBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         tvWeather = findViewById(R.id.tvWeather);
         btnFetch = findViewById(R.id.btnFetch);
         clotheRecomendation = findViewById(R.id.clotheRecommendation);
+        weatherBackground = findViewById(R.id.weatherBackground);
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         btnFetch.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 if (location != null) {
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-                    WeatherApi.fetchWeather(MainActivity.this, latitude, longitude, tvWeather, clotheRecomendation);
+                    WeatherApi.fetchWeather(MainActivity.this, latitude, longitude, tvWeather, clotheRecomendation, weatherBackground);
                 } else {
                     tvWeather.setText("Unable to get location.");
                 }
