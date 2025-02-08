@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.mascaro101.weatherapp1.activities.HistoryActivity;
 import com.mascaro101.weatherapp1.advisor.ClotheAdvisor;
 import com.mascaro101.weatherapp1.api.WeatherApi;
 import com.mascaro101.weatherapp1.api.WeatherApi.WeatherResponseListener;
@@ -23,6 +24,7 @@ import com.mascaro101.weatherapp1.database.ClothingAdvice;
 import com.mascaro101.weatherapp1.utils.WeatherDrawableUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -33,20 +35,26 @@ public class MainActivity extends AppCompatActivity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private FusedLocationProviderClient fusedLocationClient;
     private TextView tvCity, tvTemperature, tvWeather, clotheRecommendation;
+    private TextView rainPercentage, windSpeed, humidity;
     private ImageView weatherIcon;
     private Button historyButton;
+    private TextView tvMaxMinTemperature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        tvMaxMinTemperature = findViewById(R.id.tvMaxMinTemperature);
         tvCity = findViewById(R.id.tvCity);
         tvTemperature = findViewById(R.id.tvTemperature);
         tvWeather = findViewById(R.id.tvWeather);
         clotheRecommendation = findViewById(R.id.clotheRecommendation);
         weatherIcon = findViewById(R.id.weatherIcon);
         historyButton = findViewById(R.id.btnHistory);
+        rainPercentage = findViewById(R.id.rainPercentage);
+        windSpeed = findViewById(R.id.windSpeed);
+        humidity = findViewById(R.id.humidity);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -57,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         historyButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, com.mascaro101.weatherapp1.activities.HistoryActivity.class);
+            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
             startActivity(intent);
         });
     }
@@ -89,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
                     String city = response.getString("name");
                     JSONObject main = response.getJSONObject("main");
                     double temperature = main.getDouble("temp");
+                    double tempMin = main.getDouble("temp_min");
+                    double tempMax = main.getDouble("temp_max");
                     String weatherCond = response.getJSONArray("weather").getJSONObject(0).getString("description");
 
                     tvCity.setText(city);
@@ -111,6 +121,21 @@ public class MainActivity extends AppCompatActivity {
 
                     String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                     saveWeatherData(currentDate, temperature, response.getJSONObject("wind").getDouble("speed"), recommendation);
+
+                    // Update rain percentage, wind speed, and humidity
+                    JSONObject wind = response.getJSONObject("wind");
+                    JSONObject rain = response.has("rain") ? response.getJSONObject("rain") : null;
+
+                    String humidityValue = main.getInt("humidity") + "%";
+                    String windSpeedValue = wind.getDouble("speed") + " m/s";
+                    String rainPercentageValue = (rain != null && rain.has("1h")) ? rain.getDouble("1h") + " mm" : "0 mm";
+
+                    rainPercentage.setText(rainPercentageValue);
+                    windSpeed.setText(windSpeedValue);
+                    humidity.setText(humidityValue);
+
+                    // Update max and min temperature
+                    tvMaxMinTemperature.setText(String.format("Max: %.1f° Min: %.1f°", tempMax, tempMin));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
