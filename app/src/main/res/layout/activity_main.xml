@@ -19,6 +19,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Sunrise Icon (Left of City Name) -->
+    <ImageView
+        android:id="@+id/sunriseIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/sunrise"
+        android:contentDescription="Sunrise Icon"
+        app:layout_constraintBottom_toBottomOf="@id/tvCity"
+        app:layout_constraintTop_toTopOf="@id/tvCity"
+        app:layout_constraintEnd_toStartOf="@id/tvCity"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Sunrise Time -->
+    <TextView
+        android:id="@+id/sunriseTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--:--"
+        android:textSize="23sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/sunriseIcon"
+        app:layout_constraintStart_toStartOf="@id/sunriseIcon"
+        app:layout_constraintEnd_toEndOf="@id/sunriseIcon"
+        android:gravity="center" />
+
     <!-- City Name -->
     <TextView
         android:id="@+id/tvCity"
@@ -33,6 +58,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Sunset Icon (Right of City Name) -->
+    <ImageView
+        android:id="@+id/sunsetIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/sunset"
+        android:contentDescription="Sunset Icon"
+        app:layout_constraintBottom_toBottomOf="@id/tvCity"
+        app:layout_constraintTop_toTopOf="@id/tvCity"
+        app:layout_constraintStart_toEndOf="@id/tvCity"
+        android:layout_marginStart="8dp"/>
+
+    <!-- Sunset Time -->
+    <TextView
+        android:id="@+id/sunsetTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--:--"
+        android:textSize="23sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/sunsetIcon"
+        app:layout_constraintStart_toStartOf="@id/sunsetIcon"
+        app:layout_constraintEnd_toEndOf="@id/sunsetIcon"
+        android:gravity="center" />
+
+
     <!-- Date and Time -->
     <TextView
         android:id="@+id/tvDateTime"
@@ -46,7 +97,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"/>
-
 
 
     <!-- Recommendation Label -->

@@ -148,6 +148,30 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                     Toast.makeText(MainActivity.this, "Error parsing weather data", Toast.LENGTH_SHORT).show();
                 }
+                try {
+                    // Extract sunrise and sunset times
+                    JSONObject sys = response.getJSONObject("sys");
+                    long sunriseTimestamp = sys.getLong("sunrise") * 1000; // Convert to milliseconds
+                    long sunsetTimestamp = sys.getLong("sunset") * 1000;   // Convert to milliseconds
+
+                    // Format time
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+                    String sunriseTime = timeFormat.format(new Date(sunriseTimestamp));
+                    String sunsetTime = timeFormat.format(new Date(sunsetTimestamp));
+
+                    // Set sunrise and sunset times
+                    TextView sunriseTextView = findViewById(R.id.sunriseTime);
+                    TextView sunsetTextView = findViewById(R.id.sunsetTime);
+
+                    sunriseTextView.setText(sunriseTime);
+                    sunsetTextView.setText(sunsetTime);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Error parsing sunrise/sunset data", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
 
             @Override
