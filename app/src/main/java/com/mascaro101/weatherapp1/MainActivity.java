@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     String weatherCond = response.getJSONArray("weather").getJSONObject(0).getString("description");
 
                     tvCity.setText(city);
-                    tvTemperature.setText(String.format("%.1f°C", temperature));
+                    tvTemperature.setText(String.format("%.1f°", temperature));
                     tvWeather.setText(weatherCond);
 
                     int weatherDrawable = WeatherDrawableUtil.getWeatherDrawable(weatherCond);
