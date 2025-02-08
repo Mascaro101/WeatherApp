@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WeatherApp1</string>
+    <string name="weather_icon" />
+    <string name="humidity_icon">Humidity Icon</string>
+    <string name="temp_min_icon">Min Temp Icon</string>
+    <string name="temp_max_icon">Max Temp Icon</string>
+    <string name="wind_speed_icon">Wind Speed Icon</string>
 </resources>

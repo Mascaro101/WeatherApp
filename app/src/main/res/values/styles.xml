@@ -2,7 +2,7 @@
     <!-- Tema de la app -->
     <style name="Theme.WeatherApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Fondo predeterminado de la aplicación -->
-        <item name="android:windowBackground">@drawable/default_weather</item>
+        <item name="android:windowBackground">@drawable/unknown</item>
 
         <!-- Color de fondo general -->
         <item name="android:colorBackground">@color/backgroundColor</item>
