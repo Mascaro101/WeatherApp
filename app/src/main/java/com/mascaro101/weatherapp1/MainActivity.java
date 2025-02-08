@@ -39,11 +39,18 @@ public class MainActivity extends AppCompatActivity {
     private ImageView weatherIcon;
     private Button historyButton;
     private TextView tvMaxMinTemperature;
+    private TextView tvDateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        tvDateTime = findViewById(R.id.tvDateTime); // Initialize tvDateTime here
+
+        // Set current date and time in a more human-readable format
+        String currentDateTime = new SimpleDateFormat("EEEE d'th' HH:mm", Locale.getDefault()).format(new Date());
+        tvDateTime.setText(currentDateTime);
 
         tvMaxMinTemperature = findViewById(R.id.tvMaxMinTemperature);
         tvCity = findViewById(R.id.tvCity);
