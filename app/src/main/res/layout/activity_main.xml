@@ -36,6 +36,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth="2"/>
 
+
+
+
+
     <!-- Recommendation Label -->
     <TextView
         android:id="@+id/tvRecommendationLabel"
@@ -53,7 +57,6 @@
         app:layout_constraintHorizontal_bias="0.0" />
 
     <!-- Clothing Recommendation -->
-
     <ImageView
         android:id="@+id/recBox"
         android:layout_width="0dp"
@@ -84,6 +87,8 @@
         app:layout_constraintTop_toTopOf="@id/recBox" />
 
     <!-- Content Box Background -->
+
+    <!-- Weather Icon -->
     <ImageView
         android:id="@+id/contentBox"
         android:layout_width="361dp"
@@ -95,11 +100,10 @@
         app:layout_constraintBottom_toTopOf="@id/recBox"
         app:layout_constraintDimensionRatio="16:25"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCity"
-        app:layout_constraintHeight_percent="2" />
+        app:layout_constraintTop_toBottomOf="@id/tvCity" />
 
-    <!-- Weather Icon -->
     <ImageView
         android:id="@+id/weatherIcon"
         android:layout_width="160dp"
@@ -150,5 +154,44 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/iconsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvWeather"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5">
+
+        <!-- Icon 1 -->
+        <ImageView
+            android:id="@+id/icon1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="visible"
+            android:layout_marginEnd="8dp"
+            app:srcCompat="@drawable/icon1" />
+
+        <!-- Icon 2 -->
+        <ImageView
+            android:id="@+id/icon2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="visible"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:srcCompat="@drawable/icon2" />
+
+        <!-- Icon 3 -->
+        <ImageView
+            android:id="@+id/icon3"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="visible"
+            android:layout_marginStart="8dp"
+            app:srcCompat="@drawable/icon3" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
