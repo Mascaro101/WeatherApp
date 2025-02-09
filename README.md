@@ -6,3 +6,8 @@ Una aplicación en android para ver el clima. La aplicación pide la ubicación 
 Además se genera una recomendación de la ropa que se debe de llevar tomando en consideración la temperatura, el viento, etc.
 
 API Utilizada: https://openweathermap.org/
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/def6274d-4690-4bd5-a13e-7a58751d75c8" width="200">
+  <img src="https://github.com/user-attachments/assets/76456d6a-5274-4b01-8f46-b50f0d5c2ec0" width="718">
+</p>
