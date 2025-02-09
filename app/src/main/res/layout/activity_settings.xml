@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <TextView
+        android:id="@+id/tvExtremeColdThreshold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Extreme Cold Threshold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/etExtremeColdThreshold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/tvExtremeColdThreshold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <TextView
+        android:id="@+id/tvColdThreshold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cold Threshold"
+        app:layout_constraintTop_toBottomOf="@id/etExtremeColdThreshold"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/etColdThreshold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/tvColdThreshold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <TextView
+        android:id="@+id/tvTemperateThreshold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperate Threshold"
+        app:layout_constraintTop_toBottomOf="@id/etColdThreshold"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/etTemperateThreshold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/tvTemperateThreshold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <TextView
+        android:id="@+id/tvWindThreshold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wind Threshold"
+        app:layout_constraintTop_toBottomOf="@id/etTemperateThreshold"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/etWindThreshold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/tvWindThreshold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <TextView
+        android:id="@+id/tvHighHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="High Humidity"
+        app:layout_constraintTop_toBottomOf="@id/etWindThreshold"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/etHighHumidity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/tvHighHumidity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <TextView
+        android:id="@+id/tvLowVisibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Low Visibility"
+        app:layout_constraintTop_toBottomOf="@id/etHighHumidity"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/etLowVisibility"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/tvLowVisibility"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        app:layout_constraintTop_toBottomOf="@id/etLowVisibility"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

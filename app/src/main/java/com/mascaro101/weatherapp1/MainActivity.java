@@ -17,6 +17,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.mascaro101.weatherapp1.activities.HistoryActivity;
+import com.mascaro101.weatherapp1.activities.SettingsActivity;
 import com.mascaro101.weatherapp1.advisor.ClotheAdvisor;
 import com.mascaro101.weatherapp1.api.WeatherApi;
 import com.mascaro101.weatherapp1.api.WeatherApi.WeatherResponseListener;
@@ -34,6 +35,7 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final int SETTINGS_REQUEST_CODE = 2;
     private FusedLocationProviderClient fusedLocationClient;
     private TextView tvCity, tvTemperature, tvWeather, clotheRecommendation;
     private TextView rainPercentage, windSpeed, humidity;
@@ -76,6 +78,22 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
             startActivity(intent);
         });
+
+        ImageButton settingsButton = findViewById(R.id.btnSettings);
+        settingsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivityForResult(intent, SETTINGS_REQUEST_CODE);
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SETTINGS_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Reload preferences and regenerate recommendation with new settings
+            ClotheAdvisor.loadPreferences(this);
+            fetchLocationAndWeather();
+        }
     }
 
     private void fetchLocationAndWeather() {
@@ -128,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     clotheRecommendation.setText(recommendation);
 
                     String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                    saveWeatherData(currentDate, temperature, response.getJSONObject("wind").getDouble("speed"), recommendation);
+                    saveWeatherData(currentDate, temperature, response.getJSONObject("wind").getDouble("speed"), recommendation, city); // Pass the city name
 
                     // Update rain percentage, wind speed, and humidity
                     JSONObject wind = response.getJSONObject("wind");
@@ -171,8 +189,6 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                     Toast.makeText(MainActivity.this, "Error parsing sunrise/sunset data", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
 
             @Override
@@ -182,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void saveWeatherData(String date, double temperature, double windSpeed, String advice) {
+    private void saveWeatherData(String date, double temperature, double windSpeed, String advice, String cityName) {
         Executors.newSingleThreadExecutor().execute(() -> {
             AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
             ClothingAdvice clothingAdvice = new ClothingAdvice();
@@ -190,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
             clothingAdvice.temperature = temperature;
             clothingAdvice.windSpeed = windSpeed;
             clothingAdvice.advice = advice;
+            clothingAdvice.cityName = cityName; // Save the city name
             db.clothingAdviceDAO().insert(clothingAdvice);
         });
     }

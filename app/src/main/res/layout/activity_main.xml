@@ -21,11 +21,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
 
+
     <!-- City Name -->
 
     <!-- Content Box Background -->
 
     <!-- Weather Icon -->
+
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/history_icon"
+        android:src="@drawable/settings_50dp_e8eaed_fill0_wght400_grad0_opsz48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/tvCity"
@@ -306,7 +320,7 @@
         android:padding="16dp"
         android:text="We recommend a light jacket\nA hat and to keep dry"
         android:textColor="@android:color/white"
-        android:textSize="17sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/recBox"
         app:layout_constraintEnd_toEndOf="@id/recBox"
         app:layout_constraintStart_toStartOf="@id/recBox"

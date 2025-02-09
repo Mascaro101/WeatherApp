@@ -11,4 +11,5 @@ public class ClothingAdvice {
     public double temperature;
     public double windSpeed;
     public String advice;
+    public String cityName; // Add city name field
 }
