@@ -5,4 +5,7 @@
     <string name="temp_min_icon">Min Temp Icon</string>
     <string name="temp_max_icon">Max Temp Icon</string>
     <string name="wind_speed_icon">Wind Speed Icon</string>
+    <string name="history_icon">History</string>
+    <string name="update_weather_icon">Update Weather</string>
+
 </resources>

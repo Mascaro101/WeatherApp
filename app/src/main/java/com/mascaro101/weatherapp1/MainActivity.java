@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvCity, tvTemperature, tvWeather, clotheRecommendation;
     private TextView rainPercentage, windSpeed, humidity;
     private ImageView weatherIcon;
-    private Button historyButton;
+    private ImageButton historyButton;
     private TextView tvMaxMinTemperature;
     private TextView tvDateTime;
 
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
                     tvCity.setText(city);
                     tvTemperature.setText(String.format("%.1f°", temperature));
-                    tvWeather.setText(weatherCond);
+                    tvWeather.setText(weatherCond.substring(0, 1).toUpperCase() + weatherCond.substring(1));
 
                     int weatherDrawable = WeatherDrawableUtil.getWeatherDrawable(weatherCond);
                     weatherIcon.setImageResource(weatherDrawable);
